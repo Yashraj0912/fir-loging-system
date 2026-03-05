@@ -102,21 +102,28 @@ public class registerACase extends  writeFir{
     private int registering(Connection c){
         try{
 
-            String strVictim = String.format("INSERT INTO victim(adhaar , name , age) values (?,?,?)");
+            String strVictim = "INSERT INTO victim(adhaar,name,age,dob) VALUES (?,?,?,?)";
             PreparedStatement statment = c.prepareStatement(strVictim);
             statment.setInt(1,VID);
             statment.setString(2,Vname);
             statment.setInt(3,VAge);
+            statment.setDate(4, java.sql.Date.valueOf("2000-01-01"));
 
             // now criminal details to be entered
-            String strCriminal = String.format("INSERT INTO criminal(adhaar,name,age,verdict) values (?,?,?,?)");
+            String strCriminal = String.format("INSERT INTO criminal(adhaar,name,age,dob,verdict) values (?,?,?,?,?)");
             PreparedStatement criminalstatment = c.prepareStatement(strCriminal);
             criminalstatment.setInt(1,CId);
             criminalstatment.setString(2,Cname);
             criminalstatment.setInt(3,CAge);
-            criminalstatment.setString(4,"pending");
+            criminalstatment.setDate(4, java.sql.Date.valueOf("1995-01-01"));
+            criminalstatment.setString(5,"pending");
 
+            String strCase = "INSERT INTO caseT(caseID,statusC) VALUES (?,?)";
 
+            PreparedStatement caseStatement = c.prepareStatement(strCase);
+
+            caseStatement.setInt(1, CaseID);
+            caseStatement.setString(2,"running");
 
             // now case making inputs in the fir table
 
@@ -128,20 +135,20 @@ public class registerACase extends  writeFir{
             FirStatment.setInt(4,CaseID);
             FirStatment.setString(5,FirReportId);
 
-            String strCase =
-                    "INSERT INTO caseT(caseID,statusC) VALUES (?,?)";
-
-            PreparedStatement caseStatement = c.prepareStatement(strCase);
-            caseStatement.setInt(1, CaseID);
-            caseStatement.setString(2,"running");
-
+//            String Case = "INSERT INTO caseT(caseID,statusC) VALUES (?,?)";
+//
+//            PreparedStatement CaseStatement = c.prepareStatement(Case);
+//            CaseStatement.setInt(1, CaseID);
+//            CaseStatement.setString(2,"running");
+//            int i5 = CaseStatement.executeUpdate();
 
 
             // to execute update in the table and see
             int i1= statment.executeUpdate();
             int i2= criminalstatment.executeUpdate();
-            int i3 = FirStatment.executeUpdate();
             int i4 = caseStatement.executeUpdate();
+            int i3 = FirStatment.executeUpdate();
+
             if(i3==0){
                 return 0;
             }
