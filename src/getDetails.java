@@ -26,7 +26,7 @@ public class getDetails {
             ResultSet rs = statment.executeQuery();
             this.CId = rs.getInt("adhaar");
             this.CAge= rs.getInt("age");
-            this.Cname = rs.getString("name")
+            this.Cname = rs.getString("name");
 
         }
         catch (SQLException e){
