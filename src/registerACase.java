@@ -15,11 +15,18 @@ public class registerACase extends  writeFir{
     private String satatus ;
     private String verdict ;
 
+    Connection c;
+    public  registerACase (Connection c){
+        this.c = c;
+
+
+    }
+
     Scanner sc = new Scanner(System.in);
 
     // register the case and accessing the methods to enter the detains
 
-    public void registeringTheCase(Connection c){
+    public void registeringTheCase(){
         setVictimDtaile();
 
         setCriminalDetail();
@@ -28,7 +35,7 @@ public class registerACase extends  writeFir{
 
         generateCasId();
 
-        int t1 =registering(c);
+        int t1 =registering();
 
         if (t1==0){
             System.out.println("case allready exist");
@@ -99,7 +106,7 @@ public class registerACase extends  writeFir{
         FirID = CaseID;
     }
 
-    private int registering(Connection c){
+    private int registering(){
         try{
 
             String strVictim = "INSERT INTO victim(adhaar,name,age,dob) VALUES (?,?,?,?)";
