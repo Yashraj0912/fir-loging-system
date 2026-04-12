@@ -14,6 +14,7 @@ public class getDetails {
     private int VAge ;
     private int CAge ;
     private  String FirReportId;
+    private int n ;
 
     Connection c;
 
