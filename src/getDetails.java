@@ -161,7 +161,8 @@ public class getDetails {
 
     }
     public void getFirReport( String FirReportID){
-        new FileViewer("C:\\Users\\YASHRAJ\\IdeaProjects\\FIR-loging-system\\src\\firs", FirReportID);
+        String path = "src/firs";
+        new FileViewer(path, FirReportID);
 
     }
 
